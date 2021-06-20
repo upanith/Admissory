@@ -7,14 +7,15 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QSplashScreen *splash = new QSplashScreen;
-    splash->setPixmap(QPixmap("C:/Users/upani/Desktop/Admissory.png"));
-    splash->show();
+    QPixmap pixmap("C:/Users/upani/Desktop/Admissory.png");
+    QSplashScreen splash(pixmap, Qt::FramelessWindowHint);
+    splash.show();
+
+    QCoreApplication::processEvents();
 
     MainWindow w;
-    QTimer::singleShot(5000,splash,SLOT(close()));
+    QTimer::singleShot(5000,&splash,&QWidget::close);
     QTimer::singleShot(5000,&w,SLOT(show()));
 
-    //w.show();
     return a.exec();
 }
