@@ -15,6 +15,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_actionAbout_Admissory_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -2,12 +2,28 @@
 #include <QApplication>
 #include <QSplashScreen>
 #include <QTimer>
+#include <QtCore/QCoreApplication>
+#include <QProcess>
+#include <QDebug>
+
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QPixmap pixmap("C:/Users/upani/Desktop/Admissory.png");
+
+    QProcess p(0);
+    p.start("cmd", QStringList()<<"/c"<<"wmic bios get SerialNumber");
+    p.waitForStarted();
+    p.waitForFinished();
+    QString strTemp=QString::fromLocal8Bit(p.readAllStandardOutput());
+    strTemp = strTemp.trimmed();
+
+    QString BIOSSerial = strTemp.right(10);
+
+    qDebug() << BIOSSerial;
+
+    QPixmap pixmap(":/images/splash.png");
     QSplashScreen splash(pixmap, Qt::FramelessWindowHint);
     splash.show();
 
