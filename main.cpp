@@ -5,21 +5,29 @@
 #include <QtCore/QCoreApplication>
 #include <QProcess>
 #include <QDebug>
+#include <QString>
 
-
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-
+QString getBIOSserial(void){
 
     QProcess p(0);
     p.start("cmd", QStringList()<<"/c"<<"wmic bios get SerialNumber");
     p.waitForStarted();
     p.waitForFinished();
-    QString strTemp=QString::fromLocal8Bit(p.readAllStandardOutput());
+
+    QString strTemp = QString::fromLocal8Bit(p.readAllStandardOutput());
+
     strTemp = strTemp.trimmed();
 
-    QString BIOSSerial = strTemp.right(10);
+    QString BIOSserial = strTemp.right(10);
+
+    return BIOSserial;
+}
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+
+    QString BIOSSerial = getBIOSserial();
 
     qDebug() << BIOSSerial;
 
@@ -35,3 +43,4 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+
