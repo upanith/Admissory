@@ -18,6 +18,8 @@ public:
 private slots:
     void on_actionAbout_Admissory_triggered();
 
+    void on_actionExit_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

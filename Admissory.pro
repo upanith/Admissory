@@ -10,11 +10,13 @@ CONFIG += c++11
 
 SOURCES += \
     about.cpp \
+    global.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     about.h \
+    global.h \
     mainwindow.h
 
 FORMS += \
@@ -28,3 +30,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc
+
+RC_ICONS = images/icon.ico

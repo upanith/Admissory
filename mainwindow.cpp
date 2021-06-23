@@ -21,3 +21,9 @@ void MainWindow::on_actionAbout_Admissory_triggered()
     abt.exec();
 }
 
+
+void MainWindow::on_actionExit_triggered()
+{
+    QApplication::quit();
+}
+

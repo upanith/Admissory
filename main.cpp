@@ -6,30 +6,16 @@
 #include <QProcess>
 #include <QDebug>
 #include <QString>
-
-QString getBIOSserial(void){
-
-    QProcess p(0);
-    p.start("cmd", QStringList()<<"/c"<<"wmic bios get SerialNumber");
-    p.waitForStarted();
-    p.waitForFinished();
-
-    QString strTemp = QString::fromLocal8Bit(p.readAllStandardOutput());
-
-    strTemp = strTemp.trimmed();
-
-    QString BIOSserial = strTemp.right(10);
-
-    return BIOSserial;
-}
+#include "global.h"
+#include <QMessageBox>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QString BIOSSerial = getBIOSserial();
+    QString BIOS_Serial = Global::getBIOSserial();
 
-    qDebug() << BIOSSerial;
+    //qDebug() << BIOS_Serial;
 
     QPixmap pixmap(":/images/splash.png");
     QSplashScreen splash(pixmap, Qt::FramelessWindowHint);
@@ -37,10 +23,20 @@ int main(int argc, char *argv[])
 
     QCoreApplication::processEvents();
 
-    MainWindow w;
-    QTimer::singleShot(5000,&splash,&QWidget::close);
-    QTimer::singleShot(5000,&w,SLOT(show()));
+    if(BIOS_Serial=="CND5260X1D") {
+        MainWindow w;
+        w.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+        QTimer::singleShot(2500,&splash,&QWidget::close);
+        QTimer::singleShot(2000,&w,SLOT(show()));
 
-    return a.exec();
+        return a.exec();
+    } else {
+        QMessageBox msg;
+        msg.setText("This PC is not athorized to run this application!");
+        msg.setInformativeText("Please contact developer for more information.");
+        msg.setIcon(QMessageBox::Critical);
+        msg.exec();
+        a.quit();
+    }
 }
 
