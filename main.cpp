@@ -23,9 +23,10 @@ int main(int argc, char *argv[])
 
     QCoreApplication::processEvents();
 
-    if(BIOS_Serial=="CND5260X1D") {
+    if(BIOS_Serial=="CND5260X1") {
         MainWindow w;
         w.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+
         QTimer::singleShot(2500,&splash,&QWidget::close);
         QTimer::singleShot(2000,&w,SLOT(show()));
 
@@ -36,6 +37,9 @@ int main(int argc, char *argv[])
         msg.setInformativeText("Please contact developer for more information.");
         msg.setIcon(QMessageBox::Critical);
         msg.exec();
+
+        return 0;
+
         a.quit();
     }
 }
