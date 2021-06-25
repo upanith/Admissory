@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
     QCoreApplication::processEvents();
 
-    if(BIOS_Serial=="CND5260X1") {
+    if(BIOS_Serial=="CND5260X1D") {
         MainWindow w;
         w.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 
