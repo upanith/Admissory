@@ -20,6 +20,8 @@ private slots:
 
     void on_actionExit_triggered();
 
+    void on_cmdAdd_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

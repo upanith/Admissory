@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
         w.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 
         QTimer::singleShot(2500,&splash,&QWidget::close);
-        QTimer::singleShot(2000,&w,SLOT(show()));
+        QTimer::singleShot(2500,&w,SLOT(show()));
 
         return a.exec();
     } else {
